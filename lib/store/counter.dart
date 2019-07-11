@@ -1,10 +1,11 @@
 import 'package:flutter/widgets.dart';
 
-class Counter with ChangeNotifier {
+class CounterStore with ChangeNotifier {
   int _value;
   int get value => _value;
 
-  Counter(BuildContext context, this._value);
+  CounterStore(BuildContext context, this._value);
+
   void increment() {
     _value++;
     notifyListeners();

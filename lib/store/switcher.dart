@@ -2,18 +2,19 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_state_test/store/counter.dart';
 import 'package:provide/provide.dart';
 
-class Switcher with ChangeNotifier {
+class ToggleStore with ChangeNotifier {
   BuildContext _context;
+  CounterStore _counterStore; // This is a singleton form global scope
+  
   bool _value;
-  Counter _counterStore; // This is a singleton form global scope
   get value => _value;
 
-  Switcher(BuildContext context, bool value) {
+  ToggleStore(BuildContext context, bool value) {
     this
       .._context = context
       .._value = value
       // provide with counter for cross model usage
-      .._counterStore = Provide.value<Counter>(_context);
+      .._counterStore = Provide.value<CounterStore>(_context);
   }
 
   void toggle() {

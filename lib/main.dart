@@ -32,7 +32,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    final currentSwitcher = Provide.value<Switcher>(context);
+    final currentSwitcher = Provide.value<ToggleStore>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -44,12 +44,12 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               'You have pushed the button this many times:',
             ),
-            Provide<Counter>(
+            Provide<CounterStore>(
                 builder: (context, child, counter) => Text(
                       '${counter.value}',
                       style: Theme.of(context).textTheme.display1,
                     )),
-            Provide<Switcher>(
+            Provide<ToggleStore>(
               builder: (context, child, switcher) => Text(
                 '${switcher.value ? 'Fuck' : 'Shit'}',
                 style: Theme.of(context).textTheme.display1,
