@@ -6,12 +6,8 @@ import 'package:provider/provider.dart';
 Widget provide(Widget widget) {
   return MultiProvider(
     providers: [
-      ChangeNotifierProvider<CounterStore>(
-        builder: (context) => CounterStore(context),
-      ),
-      ChangeNotifierProvider<ToggleStore>(
-        builder: (context) => ToggleStore(context),
-      ),
+      ChangeNotifierProvider(builder: (context) => CounterStore(context)),
+      ChangeNotifierProvider(builder: (context) => ToggleStore(context)),
     ],
     child: widget,
   );
