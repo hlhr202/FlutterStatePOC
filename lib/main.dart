@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_test/store/counter.dart';
+import 'package:flutter_state_test/store/providers.dart';
 import 'package:flutter_state_test/store/switcher.dart';
-import 'package:provide/provide.dart';
-import 'store/provide.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(ProviderNode(providers: providers, child: MyApp()));
+  runApp(provide(MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -32,36 +32,23 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    final currentSwitcher = Provide.value<ToggleStore>(context);
+    final counterStore = Provider.of<CounterStore>(context);
+    final toggleStore = Provider.of<ToggleStore>(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: AppBar(title: Text(widget.title)),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Provide<CounterStore>(
-                builder: (context, child, counter) => Text(
-                      '${counter.value}',
-                      style: Theme.of(context).textTheme.display1,
-                    )),
-            Provide<ToggleStore>(
-              builder: (context, child, switcher) => Text(
-                '${switcher.value ? 'Fuck' : 'Shit'}',
-                style: Theme.of(context).textTheme.display1,
-              ),
-            )
+            Text('You have pushed the button this many times:'),
+            Text(counterStore.value.toString()),
+            Text(toggleStore.value.toString()),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // currentCounter.increment();
-          currentSwitcher.toggle();
+          toggleStore.toggle();
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),
